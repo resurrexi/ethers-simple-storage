@@ -19,7 +19,7 @@ async function main() {
   const encryptedJson = fs.readFileSync("./.encryptedKey.json", "utf8");
   let wallet = new ethers.Wallet.fromEncryptedJsonSync(
     encryptedJson,
-    process.env.PRIVATE_KEY_PASSWORD
+    process.env.WALLET_KEY_PASSWORD
   );
   wallet = await wallet.connect(provider);
 
