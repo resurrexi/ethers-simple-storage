@@ -1,12 +1,12 @@
-require("dotenv").config();
-const ethers = require("ethers");
-const fs = require("fs-extra");
+import { ethers } from "ethers";
+import * as fs from "fs-extra";
+import "dotenv/config";
 
 async function main() {
-  const wallet = new ethers.Wallet(process.env.WALLET_KEY);
+  const wallet = new ethers.Wallet(process.env.WALLET_KEY!);
   const encryptedJsonKey = await wallet.encrypt(
-    process.env.WALLET_KEY_PASSWORD,
-    process.env.WALLET_KEY
+    process.env.WALLET_KEY_PASSWORD!,
+    process.env.WALLET_KEY!
   );
   fs.writeFileSync("./.encryptedKey.json", encryptedJsonKey);
 }

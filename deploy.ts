@@ -1,6 +1,6 @@
-require("dotenv").config();
-const ethers = require("ethers");
-const fs = require("fs-extra");
+import { ethers } from "ethers";
+import * as fs from "fs-extra";
+import "dotenv/config";
 
 // RESOURCES
 // https://github.com/trufflesuite/ganache#readme
@@ -12,16 +12,16 @@ async function main() {
 
   // method 1, requires little effort, less secure
   // use private key from .env file
-  // const wallet = new ethers.Wallet(process.env.WALLET_KEY, provider);
+  // const wallet = new ethers.Wallet(process.env.WALLET_KEY!, provider);
 
   // method 2, requires more effort, more secure
   // hide wallet's private key from .env file by encrypting it
   const encryptedJson = fs.readFileSync("./.encryptedKey.json", "utf8");
-  let wallet = new ethers.Wallet.fromEncryptedJsonSync(
+  let wallet = ethers.Wallet.fromEncryptedJsonSync(
     encryptedJson,
-    process.env.WALLET_KEY_PASSWORD
+    process.env.WALLET_KEY_PASSWORD!
   );
-  wallet = await wallet.connect(provider);
+  wallet = wallet.connect(provider);
 
   const abi = fs.readFileSync("./SimpleStorage_sol_SimpleStorage.abi", "utf8");
   const binary = fs.readFileSync(

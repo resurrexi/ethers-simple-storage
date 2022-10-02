@@ -6,4 +6,4 @@
 4. Generate `.encryptedKey.json` by running `node encryptKey.js`.
 5. Remove `WALLET_KEY` from `.env` file.
 6. Compile contract with `npm run solc`. This will generate the `.abi` and `.bin` files.
-7. Run deployment with `node deploy.js`.
+7. Run deployment with `node deploy.js`. If script is converted to TypeScript, run with `npx ts-node deploy.ts`.
